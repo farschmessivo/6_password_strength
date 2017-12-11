@@ -4,14 +4,15 @@ import re
 
 def get_password_strength(password):
     password_strength = 0
+    if 6 <= len(password) < 8:
+        password_strength += 2
+    elif len(password) < 6:
+        password_strength += 0
+    if len(password) >= 8:
+        password_strength += 3
     for r in ('[a-z]', '[A-Z]', '[0-9]', '[$#@]'):
         if re.search(r, password):
-            password_strength += 2
-    if len(password) > 6 and len(password) < 8:
-        password_strength += 1
-    if len(password) >= 8:
-        password_strength += 2
-
+            password_strength += 1
 
     return password_strength
 
@@ -19,14 +20,12 @@ def get_password_strength(password):
 def check_password_commonality(password):
     matchedpass = False
 
-    common_passwords = [ "123456", "123456789", "qwerty", "12345678", "111111", "1234567890", "1234567",
-                            "password", "123123", "987654321", "qwertyuiop", "mynoob", "123321", "666666",
-                            "atcskd2w", "7777777", "q2w3e4r", "654321", "555555", "rjs1la7qe", "google",
-                            "q2w3e4r5t", "123qwe", "zxcvbnm", "q2w3e"]
+    with open('passwordlist.txt', 'r') as f:
+        common_passwords = f.read()
 
-    for commonPass in common_passwords:
-        if commonPass == password:
-            matchedpass = True
+        for commonPass in common_passwords:
+            if commonPass == password:
+                matchedpass = True
 
     if matchedpass == True:
         return 0
@@ -34,9 +33,9 @@ def check_password_commonality(password):
         return 2
 
 
-def password_strength_sum(password_strength, password_strength2):
-    password_strength_sum = password_strength + password_strength2
-    return password_strength_sum
+def password_strength_sum(strength, commonality):
+    strength_sum = strength + commonality
+    return strength_sum
 
 if __name__ == '__main__':
     if len(sys.argv) == 1:
