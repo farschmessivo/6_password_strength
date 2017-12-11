@@ -10,24 +10,24 @@ def get_password_strength(password):
         password_strength += 0
     if len(password) >= 8:
         password_strength += 3
-    for r in ('[a-z]', '[A-Z]', '[0-9]', '[$#@]'):
-        if re.search(r, password):
+    for pattern in ('[a-z]', '[A-Z]', '[0-9]', '[$#@]'):
+        if re.search(pattern, password):
             password_strength += 1
 
     return password_strength
 
 
 def check_password_commonality(password):
-    matchedpass = False
+    matched_pass = False
 
     with open('passwordlist.txt', 'r') as f:
         common_passwords = f.read()
 
-        for commonPass in common_passwords:
-            if commonPass == password:
-                matchedpass = True
+        for common_pass in common_passwords:
+            if common_pass == password:
+                matched_pass = True
 
-    if matchedpass == True:
+    if matched_pass == True:
         return 0
     else:
         return 2
