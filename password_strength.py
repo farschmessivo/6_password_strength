@@ -28,30 +28,18 @@ def load_data():
 
 
 def check_password_blacklist(password, common_passwords):
-    matched_pass = False
-
-    for common_pass in common_passwords:
-        if common_pass == password:
-            matched_pass = True
-
-    if matched_pass == True:
+    in_blacklist = re.findall(common_passwords, password)
+    if in_blacklist:
         return 0
     else:
         return 2
 
 
-def password_strength_sum(strength, blacklist):
-    strength_sum = strength + blacklist
-    return strength_sum
-
 if __name__ == '__main__':
     print('Please enter your password: ')
     password = getpass()
     common_passwords = load_data()
-    # if len(sys.argv) == 1:
-    #     sys.exit("Usage: python3 password_strength.py <password>")
-    # password = sys.argv[1]
     strength = get_password_strength(password)
     blacklist = check_password_blacklist(password, common_passwords)
-    password_strength_sum = password_strength_sum(strength, blacklist)
+    password_strength_sum = strength + blacklist
     print('Your password strength score is:', password_strength_sum)
