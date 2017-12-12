@@ -1,5 +1,6 @@
 # Password Strength Calculator
 The module uses a variety of techniques to rate how strong a password is on a scale of 10.
+
 1 = very weak, 10 = the strongest
 
 # Quickstart
