@@ -30,12 +30,9 @@ def load_data():
 def check_password_blacklist(password, common_passwords):
     matched_pass = False
 
-    with open('passwordlist.txt', 'r') as f:
-        common_passwords = f.read()
-
-        for common_pass in common_passwords:
-            if common_pass == password:
-                matched_pass = True
+    for common_pass in common_passwords:
+        if common_pass == password:
+            matched_pass = True
 
     if matched_pass == True:
         return 0
