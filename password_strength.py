@@ -4,13 +4,13 @@ import re
 
 def get_password_strength(password):
     password_strength = 0
-    absolute_minimum_char = 6
-    optimal_char = 8
-    if absolute_minimum_char <= len(password) < optimal_char:
+    minimum_char_amount = 6
+    optimal_char_amount = 8
+    if minimum_char_amount <= len(password) < optimal_char_amount:
         password_strength += 2
     elif len(password) < 6:
         pass
-    if len(password) >= optimal_char:
+    if len(password) >= optimal_char_amount:
         password_strength += 3
     for pattern in ('[a-z]', '[A-Z]', '[0-9]', '[$#@]'):
         if re.search(pattern, password):
