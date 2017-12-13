@@ -16,22 +16,21 @@ def get_password_strength(password):
     return password_strength
 
 
-def load_data():
+def load_blacklist():
     with open('passwordlist.txt', 'r') as file_handler:
         blacklist = file_handler.read().split()
     return blacklist
 
 
-def check_password_blacklist(password, blacklist):
-    if password not in blacklist:
-        return 2
+def check_if_password_is_not_in_blacklist(password, blacklist):
+    return(password not in blacklist) * 2
 
 
 if __name__ == '__main__':
     print('Please enter your password: ')
     password = getpass()
-    blacklist = load_data()
+    blacklist = load_blacklist()
     strength = get_password_strength(password)
-    in_blacklist = check_password_blacklist(password, blacklist)
-    password_strength_sum = strength + in_blacklist
-    print('Your password strength score is:', password_strength_sum)
+    not_in_blacklist = check_if_password_is_not_in_blacklist(password, blacklist)
+    password_strength_sum = strength + not_in_blacklist
+    print('Your password strength score is:', password_strength_sum)xs
