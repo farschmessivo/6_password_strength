@@ -23,7 +23,8 @@ def load_blacklist():
 
 
 def check_if_password_is_not_in_blacklist(password, blacklist):
-    return(password not in blacklist) * 2
+    not_in_blacklist_points = (password not in blacklist) * 2
+    return not_in_blacklist_points
 
 
 if __name__ == '__main__':
