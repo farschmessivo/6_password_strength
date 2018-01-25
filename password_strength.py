@@ -10,7 +10,8 @@ def get_password_strength(password):
         password_strength += 2
     if len(password) >= optimal_char_amount:
         password_strength += 3
-    for pattern in ('[a-z]', '[A-Z]', '[0-9]', '[$#@]'):
+    for pattern in ('[a-z]', '[A-Z]', '[0-9]', '[@#$*+,-./:;<=>?@[\]^_`{|]'):
+
         if re.search(pattern, password):
             password_strength += 1
     return password_strength
@@ -23,8 +24,7 @@ def load_blacklist():
 
 
 def check_if_password_is_not_in_blacklist(password, blacklist):
-    not_in_blacklist_points = (password not in blacklist) * 2
-    return not_in_blacklist_points
+    return password not in blacklist
 
 
 if __name__ == '__main__':
@@ -34,5 +34,5 @@ if __name__ == '__main__':
     strength = get_password_strength(password)
     not_in_blacklist = check_if_password_is_not_in_blacklist(password,
                                                              blacklist)
-    password_strength_sum = strength + not_in_blacklist
+    password_strength_sum = strength + (not_in_blacklist * 2)
     print('Your password strength score is:', password_strength_sum)
