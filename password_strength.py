@@ -1,19 +1,24 @@
 from getpass import getpass
 import re
-
+import string
 
 def get_password_strength(password):
     password_strength = 0
     minimum_char_amount = 6
     optimal_char_amount = 8
+    punctuation = set(string.punctuation)
     if len(password) >= minimum_char_amount:
         password_strength += 2
     if len(password) >= optimal_char_amount:
         password_strength += 3
-    for pattern in ('[a-z]', '[A-Z]', '[0-9]', '[@#$*+,-./:;<=>?@[\]^_`{|]'):
+
+    for pattern in ('[a-z]', '[A-Z]', '[0-9]'):
 
         if re.search(pattern, password):
             password_strength += 1
+        if pattern in punctuation:
+            password_strength += 1
+
     return password_strength
 
 
