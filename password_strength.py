@@ -38,7 +38,9 @@ if __name__ == '__main__':
     password = getpass()
     blacklist = load_blacklist()
     strength = get_password_strength(password)
-    not_in_blacklist = check_if_password_is_not_in_blacklist(password,
-                                                             blacklist)
+    not_in_blacklist = check_if_password_is_not_in_blacklist(
+        password,
+        blacklist
+    )
     password_strength_sum = strength + (not_in_blacklist * 2)
     print('Your password strength score is:', password_strength_sum)
