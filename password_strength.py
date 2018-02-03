@@ -17,7 +17,7 @@ def get_password_strength(password):
         if re.search(pattern, password):
             password_strength += 1
 
-    if len(set(string.punctuation) & set(password)) > 0:
+    if len(set(string.punctuation) & set(password)):
         password_strength += 1
 
     return password_strength
